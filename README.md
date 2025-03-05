@@ -17,3 +17,10 @@ python .\src\web_url_scanner\main.py
 ```
 
 `data` folder will be created with 2 files: `BROKEN_URL_TIMESTAMP.csv` and `URL_TIMESTAMP.csv`
+
+
+## Testing
+
+I was able to get 19k records in `URL_TIMESTAMP.csv` file during 2 hours.
+
+![img.png](img.png)
