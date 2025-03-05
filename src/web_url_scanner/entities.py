@@ -13,6 +13,7 @@ class WriteURL:
     def __str__(self):
         return f"URL {self.url} depth {self.depth} read timestamp {self.read_timestamp}"
 
+
 @dataclass
 class WriteBrokenURL:
     url: str

@@ -1,6 +1,5 @@
 """Main module."""
 
-
 import asyncio
 
 from web_url_scanner.file_writer import FileWriter
@@ -30,16 +29,27 @@ async def main():
         urls = input_file.readlines()
         for url in urls:
             url_queue.put_nowait(url)
-    url_scanner = URLScanner(write_link_queue=write_link_queue, write_broken_link_queue=write_broken_link_queue)
-    file_writer = FileWriter(write_link_queue=write_link_queue, write_broken_link_queue=write_broken_link_queue)
+    url_scanner = URLScanner(
+        write_link_queue=write_link_queue,
+        write_broken_link_queue=write_broken_link_queue,
+    )
+    file_writer = FileWriter(
+        write_link_queue=write_link_queue,
+        write_broken_link_queue=write_broken_link_queue,
+    )
 
-    scanner_tasks = [asyncio.create_task(worker(url_queue, url_scanner)) for i in range(NUM_OF_WORKERS)]
+    scanner_tasks = [
+        asyncio.create_task(worker(url_queue, url_scanner))
+        for i in range(NUM_OF_WORKERS)
+    ]
     file_writer_tasks = [
         asyncio.create_task(file_writer.write_url_file()),
-        asyncio.create_task(file_writer.write_broken_url_file())
+        asyncio.create_task(file_writer.write_broken_url_file()),
     ]
 
-    await asyncio.gather(url_queue.join(), write_link_queue.join(), write_broken_link_queue.join())
+    await asyncio.gather(
+        url_queue.join(), write_link_queue.join(), write_broken_link_queue.join()
+    )
 
     for task in scanner_tasks:
         task.cancel()
@@ -48,5 +58,5 @@ async def main():
         task.cancel()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     asyncio.run(main())
