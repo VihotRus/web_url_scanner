@@ -2,9 +2,16 @@
 
 ## package installation
 Create python virtual environment
+```bash
+python -m venv venv
+```
+
+Activate virtual environment
+```bash
+venv\Scripts\activate
+```
 
 From the project root directory run
-
 ```bash
 pip install .
 ```
