@@ -1,6 +1,7 @@
 # web_url_scanner
 
 ## package installation
+Create python virtual environment
 
 From the project root directory run
 
